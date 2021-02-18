@@ -1,2 +1,2 @@
 # java-gui-challenge
-hljhlh
+Something more useful here
