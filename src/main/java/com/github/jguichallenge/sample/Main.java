@@ -17,8 +17,8 @@ public class Main extends Application {
     public void start(Stage stage){
 
 
-        TilePane mTile = new TilePane();
-        Scene scene = new Scene(mTile);
+        TilePane root = new TilePane();
+        Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("Hello JavaFX");
         stage.setWidth(600);
@@ -27,16 +27,17 @@ public class Main extends Application {
         ObservableList<String> Langs = FXCollections.observableArrayList("Моксва", "Санкт-Петербург", "Барнаул", "Калининград");
         ComboBox<String> LangsComboBox = new ComboBox<String>(Langs);
         LangsComboBox.setValue("Choose your city:");
-        Label label1= new Label("Прогноз погоды");
-        mTile.getChildren().add(label1);
-        mTile.getChildren().add(LangsComboBox);
+        Label headerLabel = new Label("Прогноз погоды");
+        root.getChildren().add(headerLabel);
+        root.getChildren().add(LangsComboBox);
 
-        Label label2 = new Label("");
-        Image img = new Image("src\\main\\resources\\img\\sun.jpg");
+        Label weatherTypeImageHolder = new Label("");
+        Image img = new Image("img\\sun.jpg");
         ImageView view = new ImageView(img);
         view.setFitHeight(80);
         view.setPreserveRatio(true);
-        label2.setGraphic(view);
+        weatherTypeImageHolder.setGraphic(view);
+        root.getChildren().add(weatherTypeImageHolder);
 
         stage.show();
     }
