@@ -1,5 +1,4 @@
 package com.github.jguichallenge.sample;
-
 import com.github.jguichallenge.sample.ui.MainWindow;
 import javafx.application.Application;
 import javafx.stage.Stage;

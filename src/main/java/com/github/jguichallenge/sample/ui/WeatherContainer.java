@@ -2,20 +2,22 @@ package com.github.jguichallenge.sample.ui;
 
 import com.github.jguichallenge.sample.mediator.GUIMediator;
 import com.github.jguichallenge.sample.mediator.GUIMediatorComponent;
+import javafx.geometry.Orientation;
 import javafx.scene.control.Label;
 import javafx.scene.layout.TilePane;
 
-import java.util.Arrays;
 
 public class WeatherContainer extends TilePane implements WeatherRenderArea, GUIMediatorComponent {
     protected GUIMediator mediator;
     protected WeatherImage image;
     protected Label temperatureCelsiusLabel;
+
     public WeatherContainer() {
         super();
+        this.setOrientation(Orientation.VERTICAL);
         this.image = new WeatherImage();
-        this.temperatureCelsiusLabel = new Label("");
-        this.getChildren().addAll(this.image, this.temperatureCelsiusLabel);
+        this.temperatureCelsiusLabel = new Label("213");
+        this.getChildren().addAll(this.temperatureCelsiusLabel, this.image);
     }
 
     @Override

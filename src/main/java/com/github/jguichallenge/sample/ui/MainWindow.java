@@ -3,6 +3,7 @@ package com.github.jguichallenge.sample.ui;
 import com.github.jguichallenge.sample.mediator.GUIMediator;
 import com.github.jguichallenge.sample.mediator.GUIMediatorComponent;
 import com.github.jguichallenge.sample.mediator.WeatherGUIMediator;
+import javafx.geometry.Orientation;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -49,11 +50,12 @@ public class MainWindow {
         this.cityComboBox = new CityComboBox();
         this.weatherContainer = new WeatherContainer();
         this.innerComponents.addAll(Arrays.asList(this.headerLabel, this.cityComboBox, this.weatherContainer));
-        this.mediatorComponentsToRegister.addAll(Arrays.asList(this.weatherContainer));
+        this.mediatorComponentsToRegister.addAll(Arrays.asList(this.cityComboBox, this.weatherContainer));
     }
 
     protected void initializeCore() {
         this.mainLayout = new TilePane();
+        this.mainLayout.setOrientation(Orientation.VERTICAL);
         this.mainScene = new Scene(this.mainLayout);
         this.mainStage.setScene(this.mainScene);
         this.mainStage.setWidth(450);

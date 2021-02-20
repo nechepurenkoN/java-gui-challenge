@@ -20,12 +20,21 @@ public class WeatherImage extends Label {
 
     private void initializeImages() {
         for (String state : this.states) {
-            this.images.put(state, new ImageView(new Image("img\\" + state.toLowerCase() + ".jpg")));
+            this.images.put(state, new ImageIconView(new Image("img\\" + state.toLowerCase() + ".png")));
         }
-        this.images.put("Empty", new ImageView(new Image("img\\empty.jpg")));
+        this.images.put("Empty", new ImageIconView(new Image("img\\empty.png")));
     }
 
     void changeState(String newState) {
         this.setGraphic(this.images.get(newState));
+    }
+}
+
+class ImageIconView extends ImageView {
+
+    public ImageIconView(Image image) {
+        super(image);
+        this.setFitHeight(80);
+        this.setPreserveRatio(true);
     }
 }
