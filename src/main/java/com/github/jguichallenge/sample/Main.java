@@ -1,5 +1,9 @@
 package com.github.jguichallenge.sample;
 
+import com.github.jguichallenge.sample.mediator.MediatorComponent;
+import com.github.jguichallenge.sample.mediator.MediatorGui;
+import com.github.jguichallenge.sample.mediator.TemperatureLabel;
+import com.github.jguichallenge.sample.ui.CityListComboBox;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -31,13 +35,21 @@ public class Main extends Application {
         root.getChildren().add(headerLabel);
         root.getChildren().add(LangsComboBox);
 
-        Label weatherTypeImageHolder = new Label("");
-        Image img = new Image("img\\sun.jpg");
-        ImageView view = new ImageView(img);
-        view.setFitHeight(80);
-        view.setPreserveRatio(true);
-        weatherTypeImageHolder.setGraphic(view);
-        root.getChildren().add(weatherTypeImageHolder);
+        CityListComboBox list = new CityListComboBox();
+        MediatorGui medGui = new MediatorGui();
+        TemperatureLabel temperatureLabel = new TemperatureLabel();
+        root.getChildren().add(list);
+        root.getChildren().add(temperatureLabel);
+        temperatureLabel.setMediator(medGui);
+        list.setMediator(medGui);
+        medGui.registerComponents(new MediatorComponent[]{list, temperatureLabel});
+//        Label weatherTypeImageHolder = new Label("");
+//        Image img = new Image("img\\sun.jpg");
+//        ImageView view = new ImageView(img);
+//        view.setFitHeight(80);
+//        view.setPreserveRatio(true);
+//        weatherTypeImageHolder.setGraphic(view);
+//        root.getChildren().add(weatherTypeImageHolder);
 
         stage.show();
     }
