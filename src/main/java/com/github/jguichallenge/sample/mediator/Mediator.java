@@ -1,6 +1,7 @@
 package com.github.jguichallenge.sample.mediator;
 
 public interface Mediator {
-    void changeComboBox(String currentCity);
+    void changeTemperatureLabel(String currentTemperature);
+    void changeImage(String currentImage);
     void registerComponents(MediatorComponent[] toRegistration);
 }

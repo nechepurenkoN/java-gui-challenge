@@ -20,6 +20,7 @@ public class CityListComboBox extends ComboBox implements MediatorComponent {
 
     public CityListComboBox() {
         super();
+        this.setValue("Выбери свой город:");
         cityList = new String[] {"Барнаул","Москва","Киев"};
         this.getItems().addAll(cityList);
         this.setOnAction(e -> {
@@ -28,6 +29,7 @@ public class CityListComboBox extends ComboBox implements MediatorComponent {
     }
 
     private void actionHandler(){
-        mediator.changeComboBox((String) this.getValue());
+        mediator.changeTemperatureLabel((String) this.getValue());
+        mediator.changeImage((String) this.getValue());
     }
 }
