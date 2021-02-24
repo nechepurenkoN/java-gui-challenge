@@ -31,7 +31,7 @@ private Mediator mediator;
     private void setCurrentImage(String imageURL){
         Image img = new Image("img\\"+imageURL+"@2x.png");
         ImageView view = new ImageView(img);
-        view.setFitHeight(80);
+        //view.setFitHeight(50);
         view.setPreserveRatio(true);
         this.setGraphic(view);
     }

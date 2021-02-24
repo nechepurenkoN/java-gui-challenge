@@ -11,7 +11,7 @@ public class MainWindow extends Stage{
     public MainWindow(Stage stage) {
 
         TilePane MainTilePane = new TilePane();
-        Scene scene = new Scene(MainTilePane, 300, 300);
+        Scene scene = new Scene(MainTilePane, 500, 500);
         stage.setScene(scene);
         stage.setTitle("Прогноз погоды");
 

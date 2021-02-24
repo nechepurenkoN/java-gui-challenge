@@ -20,6 +20,11 @@ public class MediatorGui implements Mediator{
     }
 
     @Override
+    public void sendCurrentCity(String currentCity) {
+        refactorData.apiTalk(currentCity);
+    }
+
+    @Override
     public void registerComponents(MediatorComponent[] toRegistration) {
        for(MediatorComponent currentComponent: toRegistration){
            if (currentComponent.getName().equals("Temperature")){
@@ -30,5 +35,4 @@ public class MediatorGui implements Mediator{
            }
        }
     }
-
 }

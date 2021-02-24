@@ -2,21 +2,43 @@ package com.github.jguichallenge.sample.techcore;
 
 import org.json.JSONObject;
 
-public class RefactorData {
-    private String rawAPIData = "{\"coord\":{\"lon\":37.6156,\"lat\":55.7522},\"weather\":[{\"id\":801,\"main\":\"Clouds\",\"description\":\"few clouds\",\"icon\":\"02d\"}],\"base\":\"stations\",\"main\":{\"temp\":260.43,\"feels_like\":254.18,\"temp_min\":260.15,\"temp_max\":260.93,\"pressure\":1028,\"humidity\":72},\"visibility\":10000,\"wind\":{\"speed\":4,\"deg\":60},\"clouds\":{\"all\":20},\"dt\":1614003334,\"sys\":{\"type\":1,\"id\":9027,\"country\":\"RU\",\"sunrise\":1613968682,\"sunset\":1614005302},\"timezone\":10800,\"id\":524901,\"name\":\"Moscow\",\"cod\":200}\n" +
-            "{\"visibility\":10000,\"timezone\":10800,\"main\":{\"temp\":260.43,\"temp_min\":260.15,\"humidity\":72,\"pressure\":1028,\"feels_like\":254.18,\"temp_max\":260.93},\"clouds\":{\"all\":20},\"sys\":{\"country\":\"RU\",\"sunrise\":1613968682,\"sunset\":1614005302,\"id\":9027,\"type\":1},\"dt\":1614003334,\"coord\":{\"lon\":37.6156,\"lat\":55.7522},\"weather\":[{\"icon\":\"02d\",\"description\":\"few clouds\",\"main\":\"Clouds\",\"id\":801}],\"name\":\"Moscow\",\"cod\":200,\"id\":524901,\"base\":\"stations\",\"wind\":{\"deg\":60,\"speed\":4}}";
-    private JSONObject jsonObject;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
-    public RefactorData() {
-        this.jsonObject = new JSONObject(rawAPIData);
+public class RefactorData {
+    private String key = "4fd3cb7cf5bdac394a0d6c5bcd8cbd54";
+    private String urlPrefix = "http://api.openweathermap.org/data/2.5/weather?";
+    private JSONObject dataSave;
+
+    public void apiTalk(String cityValue) {
+        try {
+            URL url = new URL(this.urlPrefix+"q="+cityValue+"&appid="+this.key);
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            con.setRequestMethod("GET");
+            BufferedReader inside = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            String inputLine;
+            StringBuilder content = new StringBuilder();
+            while ((inputLine = inside.readLine()) != null) {
+                content.append(inputLine);
+            }
+            inside.close();
+            dataSave = new JSONObject(content.toString());
+            con.disconnect();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public String getImageId(){
-        return jsonObject.getJSONObject("weather").getString("icon");
+        return dataSave.getJSONArray("weather").getJSONObject(0).getString("icon");
     }
 
     public String getTemperature() {
-        return String.valueOf(jsonObject.getJSONObject("main").getDouble("temp"));
+        return String.valueOf(Math.round( dataSave.getJSONObject("main").getDouble("temp") - 273.15) );
     }
 }
 
